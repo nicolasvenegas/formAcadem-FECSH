@@ -296,14 +296,59 @@
   const dynamicSections = {
     init() {
       DYNAMIC_SECTIONS.forEach(section => {
-        this.addRow(section.id);
+        // Solo auto-agregar fila si es obligatoria (min > 0)
+        if (section.min > 0) {
+          this.addRow(section.id);
+        }
         
-        // Botón agregar
+        // Botón agregar/toggle
         const addBtn = document.querySelector(`[data-section="${section.id}"].btn-add`);
         if (addBtn) {
-          addBtn.addEventListener('click', () => this.addRow(section.id));
+          if (section.min === 0 && addBtn.dataset.action === 'toggle') {
+            // Sección colapsable: click hace toggle
+            addBtn.addEventListener('click', () => this.toggleSection(section.id));
+          } else {
+            // Sección normal: click agrega fila
+            addBtn.addEventListener('click', () => this.addRow(section.id));
+          }
         }
       });
+    },
+    
+    toggleSection(sectionId) {
+      const section = DYNAMIC_SECTIONS.find(s => s.id === sectionId);
+      if (!section) return;
+      
+      const container = document.getElementById(section.container);
+      const sectionEl = container.closest('.collapsible-section');
+      
+      if (container.hidden) {
+        // Mostrar sección
+        container.hidden = false;
+        sectionEl.classList.add('expanded');
+        // Si no hay filas, agregar una
+        const rows = container.querySelectorAll('.dynamic-row');
+        if (rows.length === 0) {
+          this.addRow(sectionId);
+        }
+      } else {
+        // Ocultar sección si no hay filas con datos
+        const rows = container.querySelectorAll('.dynamic-row');
+        const hasData = Array.from(rows).some(row => {
+          const inputs = row.querySelectorAll('input, select, textarea');
+          return Array.from(inputs).some(input => input.value.trim() !== '');
+        });
+        
+        if (!hasData) {
+          container.hidden = true;
+          sectionEl.classList.remove('expanded');
+          // Limpiar filas vacías
+          rows.forEach(row => row.remove());
+          this.updateRemoveButtons(sectionId);
+        } else {
+          toast.show('Elimine los datos primero para colapsar la sección', 'info');
+        }
+      }
     },
     
     addRow(sectionId) {
@@ -313,6 +358,13 @@
       const container = document.getElementById(section.container);
       const template = document.getElementById(section.template);
       if (!container || !template) return;
+      
+      // Mostrar contenedor si está oculto (para secciones colapsables)
+      if (container.hidden) {
+        container.hidden = false;
+        const sectionEl = container.closest('.collapsible-section');
+        if (sectionEl) sectionEl.classList.add('expanded');
+      }
       
       const clone = template.content.cloneNode(true);
       const row = clone.querySelector('.dynamic-row');
@@ -352,6 +404,16 @@
       row.addEventListener('animationend', () => {
         row.remove();
         this.updateRemoveButtons(sectionId);
+        
+        // Para secciones colapsables, ocultar si no quedan filas
+        if (section.min === 0) {
+          const remainingRows = container.querySelectorAll('.dynamic-row');
+          if (remainingRows.length === 0) {
+            container.hidden = true;
+            const sectionEl = container.closest('.collapsible-section');
+            if (sectionEl) sectionEl.classList.remove('expanded');
+          }
+        }
       }, { once: true });
     },
     

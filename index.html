@@ -102,12 +102,12 @@
         </section>
 
         <!-- Estudios de Magíster -->
-        <section class="card form-section" aria-labelledby="magister-title">
+        <section class="card form-section collapsible-section" aria-labelledby="magister-title">
           <div class="card-header">
             <h2 id="magister-title">Estudios de Magíster</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="magisteres">+ Agregar magíster</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="magisteres" data-action="toggle">+ Agregar magíster</button>
           </div>
-          <div id="magisteres-container" class="dynamic-rows-container"></div>
+          <div id="magisteres-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="magister-template">
             <div class="dynamic-row form-grid">
               <div class="form-group">
@@ -130,12 +130,12 @@
         </section>
 
         <!-- Estudios de Doctorado -->
-        <section class="card form-section" aria-labelledby="doctorado-title">
+        <section class="card form-section collapsible-section" aria-labelledby="doctorado-title">
           <div class="card-header">
             <h2 id="doctorado-title">Estudios de Doctorado</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="doctorados">+ Agregar doctorado</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="doctorados" data-action="toggle">+ Agregar doctorado</button>
           </div>
-          <div id="doctorados-container" class="dynamic-rows-container"></div>
+          <div id="doctorados-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="doctorado-template">
             <div class="dynamic-row form-grid">
               <div class="form-group">
@@ -158,12 +158,12 @@
         </section>
 
         <!-- Proyectos de Investigación -->
-        <section class="card form-section" aria-labelledby="proyectos-title">
+        <section class="card form-section collapsible-section" aria-labelledby="proyectos-title">
           <div class="card-header">
             <h2 id="proyectos-title">Proyectos de Investigación</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="proyectos">+ Agregar proyecto</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="proyectos" data-action="toggle">+ Agregar proyecto</button>
           </div>
-          <div id="proyectos-container" class="dynamic-rows-container"></div>
+          <div id="proyectos-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="proyecto-template">
             <div class="dynamic-row form-grid">
               <div class="form-group">
@@ -202,12 +202,12 @@
         </section>
 
         <!-- Publicaciones -->
-        <section class="card form-section" aria-labelledby="publicaciones-title">
+        <section class="card form-section collapsible-section" aria-labelledby="publicaciones-title">
           <div class="card-header">
             <h2 id="publicaciones-title">Publicaciones Científicas</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="publicaciones">+ Agregar publicación</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="publicaciones" data-action="toggle">+ Agregar publicación</button>
           </div>
-          <div id="publicaciones-container" class="dynamic-rows-container"></div>
+          <div id="publicaciones-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="publicacion-template">
             <div class="dynamic-row form-grid">
               <div class="form-group">
@@ -251,12 +251,12 @@
         </section>
 
         <!-- Libros o Capítulos -->
-        <section class="card form-section" aria-labelledby="libros-title">
+        <section class="card form-section collapsible-section" aria-labelledby="libros-title">
           <div class="card-header">
             <h2 id="libros-title">Libros o Capítulos de Libros</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="libros">+ Agregar libro/capítulo</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="libros" data-action="toggle">+ Agregar libro/capítulo</button>
           </div>
-          <div id="libros-container" class="dynamic-rows-container"></div>
+          <div id="libros-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="libro-template">
             <div class="dynamic-row form-grid">
               <div class="form-group">

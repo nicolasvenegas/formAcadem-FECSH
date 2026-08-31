@@ -436,6 +436,44 @@ body {
 }
 
 /* ===================================
+   Collapsible Sections
+   =================================== */
+.collapsible-section {
+  transition: all var(--transition-normal);
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: max-height var(--transition-normal), opacity var(--transition-normal), padding var(--transition-normal);
+}
+
+.collapsible-content[hidden] {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 var(--space-md);
+  margin: 0;
+}
+
+.collapsible-content:not([hidden]) {
+  max-height: 5000px;
+  opacity: 1;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+}
+
+.collapsible-section .card-header {
+  cursor: pointer;
+}
+
+.collapsible-section .btn-add[data-action="toggle"]::before {
+  content: '+ ';
+}
+
+.collapsible-section.expanded .btn-add[data-action="toggle"]::before {
+  content: '− ';
+}
+
+/* ===================================
    Buttons
    =================================== */
 .btn {
