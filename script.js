@@ -21,7 +21,7 @@
     authGate = document.getElementById('auth-gate');
     authForm = document.getElementById('auth-form');
     authEmail = document.getElementById('auth-email');
-    authError = document.getElementById('auth-error');
+    authError = document.getElementById('auth-email-error'); // ID real en HTML
     mainForm = document.getElementById('main-form');
     emailInput = document.getElementById('email');
     submissionIdInput = document.getElementById('submission-id');
