@@ -79,8 +79,18 @@
     },
 
     // Mostrar/ocultar elementos
-    show(el) { el.hidden = false; el.style.display = ''; },
-    hide(el) { el.hidden = true; el.style.display = 'none'; },
+    show(el) { 
+      if (!el) return; 
+      el.hidden = false; 
+      el.style.display = ''; 
+      el.classList.remove('form-hidden'); 
+    },
+    hide(el) { 
+      if (!el) return; 
+      el.hidden = true; 
+      el.style.display = 'none'; 
+      el.classList.add('form-hidden'); 
+    },
 
     // Obtener datos de formulario como objeto
     formToObject(form) {
