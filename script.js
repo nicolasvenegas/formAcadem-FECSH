@@ -13,19 +13,26 @@
   const AUTH_DOMAINS = CONFIG.AUTH_DOMAINS || ['@ufrontera.cl'];
   const APPS_SCRIPT_URL = CONFIG.APPS_SCRIPT_URL || '';
   
-  // Elementos DOM
-  const authGate = document.getElementById('auth-gate');
-  const authForm = document.getElementById('auth-form');
-  const authEmail = document.getElementById('auth-email');
-  const authError = document.getElementById('auth-error');
-  const mainForm = document.getElementById('main-form');
-  const emailInput = document.getElementById('email');
-  const submissionIdInput = document.getElementById('submission-id');
-  const submitBtn = document.getElementById('submit-btn');
-  const resetBtn = document.getElementById('reset-btn');
-  const btnLoading = submitBtn.querySelector('.btn-loading');
-  const btnText = submitBtn.querySelector('.btn-text');
-  const toastContainer = document.getElementById('toast-container');
+  // Elementos DOM (se inicializan en init())
+  let authGate, authForm, authEmail, authError, mainForm;
+  let emailInput, submissionIdInput, submitBtn, resetBtn, btnLoading, btnText, toastContainer;
+  
+  function getDOMElements() {
+    authGate = document.getElementById('auth-gate');
+    authForm = document.getElementById('auth-form');
+    authEmail = document.getElementById('auth-email');
+    authError = document.getElementById('auth-error');
+    mainForm = document.getElementById('main-form');
+    emailInput = document.getElementById('email');
+    submissionIdInput = document.getElementById('submission-id');
+    submitBtn = document.getElementById('submit-btn');
+    resetBtn = document.getElementById('reset-btn');
+    btnLoading = submitBtn?.querySelector('.btn-loading');
+    btnText = submitBtn?.querySelector('.btn-text');
+    toastContainer = document.getElementById('toast-container');
+    
+    console.log('DOM Elements:', { authGate, authForm, authEmail, authError, mainForm, emailInput, submitBtn, resetBtn, toastContainer });
+  }
 
   // Secciones dinámicas
   const DYNAMIC_SECTIONS = [
@@ -535,10 +542,17 @@
   // Inicialización
   // ===================================
   function init() {
+    getDOMElements();
+    
     // Verificar que tenemos la URL del Apps Script
     if (!APPS_SCRIPT_URL) {
       console.error('APPS_SCRIPT_URL no configurada en config.js');
       toast.show('Error de configuración: falta URL del backend', 'error');
+      return;
+    }
+    
+    if (!authForm) {
+      console.error('authForm no encontrado en el DOM');
       return;
     }
     
