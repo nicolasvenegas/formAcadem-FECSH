@@ -531,7 +531,7 @@
           });
         }
         
-        this.updateRemoveButtons(section.id);
+        dynamicSections.updateRemoveButtons(section.id);
       });
       
       // Limpiar validación
