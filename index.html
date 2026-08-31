@@ -29,7 +29,7 @@
         <form id="auth-form" class="form" novalidate>
           <div class="form-group">
             <label for="auth-email">Correo electrónico institucional</label>
-            <input type="email" id="auth-email" name="email" required autocomplete="email" placeholder="correo@ufrontera.cl" pattern=".*@ufrontera\.cl$">
+            <input type="email" id="auth-email" name="email" required autocomplete="email" pattern=".*@ufrontera\.cl$">
             <span class="error-message" id="auth-email-error">Debe usar un correo @ufrontera.cl</span>
           </div>
           <button type="submit" class="btn btn-primary btn-full">Continuar</button>
@@ -39,6 +39,8 @@
       <!-- Main Form (hidden initially) -->
       <form id="main-form" class="form-hidden" novalidate>
         <input type="hidden" name="submission_id" id="submission-id">
+        <!-- Honeypot anti-bot field -->
+        <input type="email" name="website" tabindex="-1" autocomplete="off" style="display:none;opacity:0;position:absolute;left:-9999px" aria-hidden="true">
         
         <!-- Perfil Personal -->
         <section class="card form-section" aria-labelledby="perfil-title">
