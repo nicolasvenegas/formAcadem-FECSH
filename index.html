@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario Académicos FECSH - Universidad de La Frontera">
+  <title>Formulario Académicos FECSH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <img src="https://www.ufrontera.cl/wp-content/uploads/2023/08/logo-UFRO-blanco-horizontal.png" alt="Universidad de La Frontera" class="logo" onerror="this.style.display='none'">
+      <div class="header-text">
+        <h1>Facultad de Educación, Ciencias Sociales y Humanidades</h1>
+        <p class="subtitle">Formulario de Registro Académicos FECSH</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Auth Gate -->
+      <section id="auth-gate" class="card auth-card" aria-labelledby="auth-title">
+        <div class="card-header">
+          <h2 id="auth-title">Acceso al Formulario</h2>
+          <p class="card-description">Ingrese su correo institucional @ufrontera.cl para continuar</p>
+        </div>
+        <form id="auth-form" class="form" novalidate>
+          <div class="form-group">
+            <label for="auth-email">Correo electrónico institucional</label>
+            <input type="email" id="auth-email" name="email" required autocomplete="email" placeholder="nombre@ufrontera.cl" pattern=".*@ufrontera\.cl$">
+            <span class="error-message" id="auth-email-error">Debe usar un correo @ufrontera.cl</span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Continuar</button>
+        </form>
+      </section>
+
+      <!-- Main Form (hidden initially) -->
+      <form id="main-form" class="form-hidden" novalidate>
+        <input type="hidden" name="submission_id" id="submission-id">
+        
+        <!-- Perfil Personal -->
+        <section class="card form-section" aria-labelledby="perfil-title">
+          <div class="card-header">
+            <h2 id="perfil-title">Perfil Personal <span class="required-badge">Obligatorio</span></h2>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nombre">Nombre completo <span class="required">*</span></label>
+              <input type="text" id="nombre" name="perfil[nombre]" required autocomplete="name" maxlength="200">
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico <span class="required">*</span></label>
+              <input type="email" id="email" name="perfil[email]" required autocomplete="email" readonly>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="perfil[telefono]" autocomplete="tel" placeholder="+56 9 XXXX XXXX" maxlength="20">
+            </div>
+            <div class="form-group">
+              <label for="departamento">Unidad de adscripción <span class="required">*</span></label>
+              <select id="departamento" name="perfil[departamento]" required>
+                <option value="">Seleccione...</option>
+                <option value="Departamento de Lenguas, Literatura y Comunicación">Departamento de Lenguas, Literatura y Comunicación</option>
+                <option value="Departamento de Educación">Departamento de Educación</option>
+                <option value="Departamento de Psicología">Departamento de Psicología</option>
+                <option value="Departamento de Ciencias Sociales">Departamento de Ciencias Sociales</option>
+                <option value="Departamento de Trabajo Social">Departamento de Trabajo Social</option>
+                <option value="Departamento de Educación Física, Deportes y Recreación">Departamento de Educación Física, Deportes y Recreación</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Estudios de Pregrado -->
+        <section class="card form-section" aria-labelledby="pregrado-title">
+          <div class="card-header">
+            <h2 id="pregrado-title">Estudios de Pregrado <span class="required-badge">Mínimo 1 obligatorio</span></h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="pregrados">+ Agregar pregrado</button>
+          </div>
+          <div id="pregrados-container" class="dynamic-rows-container"></div>
+          <template id="pregrado-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Título de pregrado <span class="required">*</span></label>
+                <input type="text" name="pregrados[][titulo]" required maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Institución <span class="required">*</span></label>
+                <input type="text" name="pregrados[][institucion]" required maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>País <span class="required">*</span></label>
+                <input type="text" name="pregrados[][pais]" required maxlength="100">
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar pregrado">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Estudios de Magíster -->
+        <section class="card form-section" aria-labelledby="magister-title">
+          <div class="card-header">
+            <h2 id="magister-title">Estudios de Magíster</h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="magisteres">+ Agregar magíster</button>
+          </div>
+          <div id="magisteres-container" class="dynamic-rows-container"></div>
+          <template id="magister-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Título de Magíster</label>
+                <input type="text" name="magisteres[][titulo]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Institución</label>
+                <input type="text" name="magisteres[][institucion]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>País</label>
+                <input type="text" name="magisteres[][pais]" maxlength="100">
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar magíster">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Estudios de Doctorado -->
+        <section class="card form-section" aria-labelledby="doctorado-title">
+          <div class="card-header">
+            <h2 id="doctorado-title">Estudios de Doctorado</h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="doctorados">+ Agregar doctorado</button>
+          </div>
+          <div id="doctorados-container" class="dynamic-rows-container"></div>
+          <template id="doctorado-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Título de Doctorado</label>
+                <input type="text" name="doctorados[][titulo]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Institución</label>
+                <input type="text" name="doctorados[][institucion]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>País</label>
+                <input type="text" name="doctorados[][pais]" maxlength="100">
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar doctorado">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Proyectos de Investigación -->
+        <section class="card form-section" aria-labelledby="proyectos-title">
+          <div class="card-header">
+            <h2 id="proyectos-title">Proyectos de Investigación</h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="proyectos">+ Agregar proyecto</button>
+          </div>
+          <div id="proyectos-container" class="dynamic-rows-container"></div>
+          <template id="proyecto-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Nombre del Proyecto</label>
+                <input type="text" name="proyectos[][nombre_proyecto]" maxlength="300">
+              </div>
+              <div class="form-group">
+                <label>Fondo de Financiamiento</label>
+                <input type="text" name="proyectos[][fondo]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Año Inicio</label>
+                <input type="number" name="proyectos[][anio_inicio]" min="1900" max="2099" step="1">
+              </div>
+              <div class="form-group">
+                <label>Año Término</label>
+                <input type="number" name="proyectos[][anio_termino]" min="1900" max="2099" step="1">
+              </div>
+              <div class="form-group">
+                <label>Título del Proyecto</label>
+                <input type="text" name="proyectos[][titulo_proyecto]" maxlength="300">
+              </div>
+              <div class="form-group">
+                <label>Investigador Responsable</label>
+                <input type="text" name="proyectos[][investigador_responsable]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Co-Investigadores</label>
+                <textarea name="proyectos[][coinvestigadores]" rows="2" maxlength="500"></textarea>
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar proyecto">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Publicaciones -->
+        <section class="card form-section" aria-labelledby="publicaciones-title">
+          <div class="card-header">
+            <h2 id="publicaciones-title">Publicaciones Científicas</h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="publicaciones">+ Agregar publicación</button>
+          </div>
+          <div id="publicaciones-container" class="dynamic-rows-container"></div>
+          <template id="publicacion-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Título de la Publicación</label>
+                <input type="text" name="publicaciones[][titulo]" maxlength="300">
+              </div>
+              <div class="form-group">
+                <label>Medio de Publicación</label>
+                <input type="text" name="publicaciones[][medio]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Autores</label>
+                <textarea name="publicaciones[][autores]" rows="2" maxlength="500"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Año</label>
+                <input type="number" name="publicaciones[][anio]" min="1900" max="2099" step="1">
+              </div>
+              <div class="form-group">
+                <label>ISSN</label>
+                <input type="text" name="publicaciones[][issn]" maxlength="20" placeholder="XXXX-XXXX">
+              </div>
+              <div class="form-group">
+                <label>Páginas o Rango</label>
+                <input type="text" name="publicaciones[][paginas]" maxlength="50" placeholder="123-145">
+              </div>
+              <div class="form-group checkbox-group">
+                <label>Base de datos de indexación</label>
+                <div class="checkboxes">
+                  <label class="checkbox-label"><input type="checkbox" name="publicaciones[][bases_datos][]" value="WoS"> WoS</label>
+                  <label class="checkbox-label"><input type="checkbox" name="publicaciones[][bases_datos][]" value="SciELO"> SciELO</label>
+                  <label class="checkbox-label"><input type="checkbox" name="publicaciones[][bases_datos][]" value="Scopus"> Scopus</label>
+                  <label class="checkbox-label"><input type="checkbox" name="publicaciones[][bases_datos][]" value="Otro"> Otro</label>
+                </div>
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar publicación">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Libros o Capítulos -->
+        <section class="card form-section" aria-labelledby="libros-title">
+          <div class="card-header">
+            <h2 id="libros-title">Libros o Capítulos de Libros</h2>
+            <button type="button" class="btn btn-secondary btn-add" data-section="libros">+ Agregar libro/capítulo</button>
+          </div>
+          <div id="libros-container" class="dynamic-rows-container"></div>
+          <template id="libro-template">
+            <div class="dynamic-row form-grid">
+              <div class="form-group">
+                <label>Tipo <span class="required">*</span></label>
+                <select name="libros[][tipo]" required>
+                  <option value="">Seleccione...</option>
+                  <option value="Libro">Libro</option>
+                  <option value="Capítulo">Capítulo de Libro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Título de Capítulo / Título de Libro <span class="required">*</span></label>
+                <input type="text" name="libros[][titulo]" required maxlength="300">
+              </div>
+              <div class="form-group">
+                <label>Autores</label>
+                <textarea name="libros[][autores]" rows="2" maxlength="500"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Editorial</label>
+                <input type="text" name="libros[][editorial]" maxlength="200">
+              </div>
+              <div class="form-group">
+                <label>Año de Publicación</label>
+                <input type="number" name="libros[][anio]" min="1900" max="2099" step="1">
+              </div>
+              <div class="form-group">
+                <label>ISBN</label>
+                <input type="text" name="libros[][isbn]" maxlength="20" placeholder="978-XXXXXXXXXX">
+              </div>
+              <div class="form-group form-group-actions">
+                <button type="button" class="btn btn-danger btn-remove" aria-label="Eliminar libro/capítulo">×</button>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Submit Actions -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+            <span class="btn-text">Enviar Formulario</span>
+            <span class="btn-loading" hidden>Enviando...</span>
+          </button>
+          <button type="button" class="btn btn-outline" id="reset-btn">Limpiar</button>
+        </div>
+      </form>
+
+      <!-- Toast Notifications -->
+      <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Facultad de Educación, Ciencias Sociales y Humanidades - Universidad de La Frontera</p>
+      <p>Avenida Francisco Salazar 01145, Temuco – Chile | Fono: (56) 45 232 5000</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
