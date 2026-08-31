@@ -24,12 +24,12 @@
       <section id="auth-gate" class="card auth-card" aria-labelledby="auth-title">
         <div class="card-header">
           <h2 id="auth-title">Acceso al Formulario</h2>
-          <p class="card-description">Ingrese su correo institucional @ufrontera.cl para continuar</p>
+          <p class="card-description">Ingrese su correo electrónico institucional para continuar</p>
         </div>
         <form id="auth-form" class="form" novalidate>
           <div class="form-group">
             <label for="auth-email">Correo electrónico institucional</label>
-            <input type="email" id="auth-email" name="email" required autocomplete="email" placeholder="nombre@ufrontera.cl" pattern=".*@ufrontera\.cl$">
+            <input type="email" id="auth-email" name="email" required autocomplete="email" placeholder="correo@ufrontera.cl" pattern=".*@ufrontera\.cl$">
             <span class="error-message" id="auth-email-error">Debe usar un correo @ufrontera.cl</span>
           </div>
           <button type="submit" class="btn btn-primary btn-full">Continuar</button>
@@ -105,7 +105,7 @@
         <section class="card form-section collapsible-section" aria-labelledby="magister-title">
           <div class="card-header">
             <h2 id="magister-title">Estudios de Magíster</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="magisteres" data-action="toggle">+ Agregar magíster</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="magisteres" data-action="toggle" aria-label="Agregar magíster">+</button>
           </div>
           <div id="magisteres-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="magister-template">
@@ -133,7 +133,7 @@
         <section class="card form-section collapsible-section" aria-labelledby="doctorado-title">
           <div class="card-header">
             <h2 id="doctorado-title">Estudios de Doctorado</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="doctorados" data-action="toggle">+ Agregar doctorado</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="doctorados" data-action="toggle" aria-label="Agregar doctorado">+</button>
           </div>
           <div id="doctorados-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="doctorado-template">
@@ -161,7 +161,7 @@
         <section class="card form-section collapsible-section" aria-labelledby="proyectos-title">
           <div class="card-header">
             <h2 id="proyectos-title">Proyectos de Investigación</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="proyectos" data-action="toggle">+ Agregar proyecto</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="proyectos" data-action="toggle" aria-label="Agregar proyecto">+</button>
           </div>
           <div id="proyectos-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="proyecto-template">
@@ -205,7 +205,7 @@
         <section class="card form-section collapsible-section" aria-labelledby="publicaciones-title">
           <div class="card-header">
             <h2 id="publicaciones-title">Publicaciones Científicas</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="publicaciones" data-action="toggle">+ Agregar publicación</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="publicaciones" data-action="toggle" aria-label="Agregar publicación">+</button>
           </div>
           <div id="publicaciones-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="publicacion-template">
@@ -254,7 +254,7 @@
         <section class="card form-section collapsible-section" aria-labelledby="libros-title">
           <div class="card-header">
             <h2 id="libros-title">Libros o Capítulos de Libros</h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="libros" data-action="toggle">+ Agregar libro/capítulo</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="libros" data-action="toggle" aria-label="Agregar libro/capítulo">+</button>
           </div>
           <div id="libros-container" class="dynamic-rows-container collapsible-content" hidden></div>
           <template id="libro-template">

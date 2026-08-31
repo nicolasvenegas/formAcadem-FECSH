@@ -465,12 +465,19 @@ body {
   cursor: pointer;
 }
 
-.collapsible-section .btn-add[data-action="toggle"]::before {
-  content: '+ ';
+.collapsible-section .btn-add[data-action="toggle"] {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.collapsible-section.expanded .btn-add[data-action="toggle"]::before {
-  content: '− ';
+.collapsible-section.expanded .btn-add[data-action="toggle"] {
+  transform: rotate(45deg);
 }
 
 /* ===================================
