@@ -349,6 +349,9 @@
         if (sectionEl) sectionEl.classList.add('expanded');
       }
       
+      const currentRows = container.querySelectorAll('.dynamic-row').length;
+      const willBeFirstAddedRow = currentRows >= section.min;
+      
       const clone = template.content.cloneNode(true);
       const row = clone.querySelector('.dynamic-row');
       
@@ -367,6 +370,14 @@
       
       container.appendChild(clone);
       this.updateRemoveButtons(sectionId);
+      
+      // Actualizar texto del botón para secciones con min > 0 (pregrados)
+      if (section.min > 0 && willBeFirstAddedRow) {
+        const addBtn = document.querySelector(`[data-section="${section.id}"][data-text-base]`);
+        if (addBtn) {
+          addBtn.dataset.otherAdded = 'true';
+        }
+      }
       
       return row;
     },
@@ -387,6 +398,17 @@
       row.addEventListener('animationend', () => {
         row.remove();
         this.updateRemoveButtons(sectionId);
+        
+        // Actualizar texto del botón para secciones con min > 0 (pregrados)
+        if (section.min > 0) {
+          const remainingRows = container.querySelectorAll('.dynamic-row');
+          if (remainingRows.length === section.min) {
+            const addBtn = document.querySelector(`[data-section="${section.id}"][data-text-base]`);
+            if (addBtn) {
+              addBtn.dataset.otherAdded = 'false';
+            }
+          }
+        }
         
         // Para secciones colapsables, ocultar si no quedan filas
         if (section.min === 0) {

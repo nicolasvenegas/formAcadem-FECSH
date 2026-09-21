@@ -79,7 +79,10 @@
         <section class="card form-section" aria-labelledby="pregrado-title">
           <div class="card-header">
             <h2 id="pregrado-title">Estudios de Pregrado <span class="required-badge">Mínimo 1 obligatorio</span></h2>
-            <button type="button" class="btn btn-secondary btn-add" data-section="pregrados">+ Agregar pregrado</button>
+            <button type="button" class="btn btn-secondary btn-add" data-section="pregrados" data-text-base="pregrado">
+              <span class="btn-text-initial">+ Agregar pregrado</span>
+              <span class="btn-text-other" hidden>+ Agregar otro pregrado</span>
+            </button>
           </div>
           <div id="pregrados-container" class="dynamic-rows-container"></div>
           <template id="pregrado-template">

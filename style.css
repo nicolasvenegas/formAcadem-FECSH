@@ -475,15 +475,18 @@ body {
   white-space: nowrap;
 }
 
-.collapsible-section .btn-add[data-action="toggle"] .btn-text-expanded {
+.collapsible-section .btn-add[data-action="toggle"] .btn-text-expanded,
+.btn-add[data-text-base] .btn-text-other {
   display: none;
 }
 
-.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-collapsed {
+.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-collapsed,
+.btn-add[data-text-base]:not([data-other-added="false"]) .btn-text-initial {
   display: none;
 }
 
-.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-expanded {
+.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-expanded,
+.btn-add[data-text-base][data-other-added="true"] .btn-text-other {
   display: inline;
 }
 
