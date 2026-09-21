@@ -466,18 +466,25 @@ body {
 }
 
 .collapsible-section .btn-add[data-action="toggle"] {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  font-size: 1.5rem;
-  line-height: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.collapsible-section.expanded .btn-add[data-action="toggle"] {
-  transform: rotate(45deg);
+.collapsible-section .btn-add[data-action="toggle"] .btn-text-expanded {
+  display: none;
+}
+
+.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-collapsed {
+  display: none;
+}
+
+.collapsible-section.expanded .btn-add[data-action="toggle"] .btn-text-expanded {
+  display: inline;
 }
 
 /* ===================================
