@@ -301,12 +301,12 @@
           this.addRow(section.id);
         }
         
-        // Botón agregar/toggle
+        // Botón agregar
         const addBtn = document.querySelector(`[data-section="${section.id}"].btn-add`);
         if (addBtn) {
-          if (section.min === 0 && addBtn.dataset.action === 'toggle') {
-            // Sección colapsable: click hace toggle
-            addBtn.addEventListener('click', () => this.toggleSection(section.id));
+          if (section.min === 0) {
+            // Sección colapsable: click inteligente
+            addBtn.addEventListener('click', () => this.handleAddClick(section.id));
           } else {
             // Sección normal: click agrega fila
             addBtn.addEventListener('click', () => this.addRow(section.id));
@@ -315,39 +315,22 @@
       });
     },
     
-    toggleSection(sectionId) {
+    handleAddClick(sectionId) {
       const section = DYNAMIC_SECTIONS.find(s => s.id === sectionId);
       if (!section) return;
       
       const container = document.getElementById(section.container);
       const sectionEl = container.closest('.collapsible-section');
+      const isExpanded = !container.hidden && sectionEl.classList.contains('expanded');
       
-      if (container.hidden) {
-        // Mostrar sección
+      if (!isExpanded) {
+        // Sección colapsada → expandir + agregar 1ª fila
         container.hidden = false;
         sectionEl.classList.add('expanded');
-        // Si no hay filas, agregar una
-        const rows = container.querySelectorAll('.dynamic-row');
-        if (rows.length === 0) {
-          this.addRow(sectionId);
-        }
+        this.addRow(sectionId);
       } else {
-        // Ocultar sección si no hay filas con datos
-        const rows = container.querySelectorAll('.dynamic-row');
-        const hasData = Array.from(rows).some(row => {
-          const inputs = row.querySelectorAll('input, select, textarea');
-          return Array.from(inputs).some(input => input.value.trim() !== '');
-        });
-        
-        if (!hasData) {
-          container.hidden = true;
-          sectionEl.classList.remove('expanded');
-          // Limpiar filas vacías
-          rows.forEach(row => row.remove());
-          this.updateRemoveButtons(sectionId);
-        } else {
-          toast.show('Elimine los datos primero para colapsar la sección', 'info');
-        }
+        // Sección expandida → agregar otra fila
+        this.addRow(sectionId);
       }
     },
     
